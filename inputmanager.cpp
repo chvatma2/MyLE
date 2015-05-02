@@ -28,6 +28,6 @@ void InputManager::keyReleased(QKeyEvent *event)
 
 void InputManager::mouseMoved(QMouseEvent *event)
 {
-
+    //std::cout << "X:" << event->localPos().x() << " Y:" << event->localPos().y() << std::endl;
 }
 
