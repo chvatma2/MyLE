@@ -1,7 +1,8 @@
 <RCC>
-    <qresource prefix="/resources">
+    <qresource prefix="/">
         <file>fragshader.frag</file>
         <file>vertshader.vert</file>
         <file>textures/JimmyJump/PNG/CharacterLeft_Standing.png</file>
+        <file>CharacterRight_Standing.png</file>
     </qresource>
 </RCC>

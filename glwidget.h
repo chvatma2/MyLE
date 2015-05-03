@@ -6,9 +6,11 @@
 #include <QOpenGLShaderProgram>
 #include <QTimer>
 #include <QTime>
+#include <QColor>
 #include "inputmanager.h"
 #include "sprite.h"
 #include "vertex.h"
+#include "resourcemanager.h"
 
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Compatibility
 {
@@ -17,9 +19,15 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Compatibil
 public:
     explicit GLWidget(QWidget* parent = 0);
     ~GLWidget();
-    void paintGL();
-    void resizeGL(int w, int h);
-    void initializeGL();
+
+    void paintGL() Q_DECL_OVERRIDE;
+    void resizeGL(int w, int h) Q_DECL_OVERRIDE;
+    void initializeGL() Q_DECL_OVERRIDE;
+    QSize minimumSizeHint() const Q_DECL_OVERRIDE;
+
+    QSize sizeHint() const Q_DECL_OVERRIDE;
+
+    void setClearColor(const QColor& color);
 
 private slots:
     void refresh();
@@ -28,11 +36,16 @@ private slots:
 private:
     qreal m_refreshRate;
     QTimer m_redrawTimer;
+    QTimer m_fpsTimer;
     InputManager* m_inputManager;
     Sprite * m_sprite;
     QOpenGLShaderProgram * m_shader;
     GLfloat m_time;
-    QTimer m_fpsTimer;
+    QColor m_clearColor;
+
+    ResourceManager m_resourceManager;
+    QOpenGLTexture * m_testTexture;
+
     int m_frameCounter;
 
     void connectSlotsSignals();

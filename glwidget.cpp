@@ -4,7 +4,7 @@
 #include <iostream>
 #include <QDebug>
 
-GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_time(0), m_frameCounter(0)
+GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_shader(0), m_time(0), m_clearColor(Qt::darkBlue), m_frameCounter(0)
 {
     m_inputManager = new InputManager(this);
     QSurfaceFormat f = this->format();
@@ -17,21 +17,43 @@ GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_time(0), m_frameC
 
 GLWidget::~GLWidget()
 {
+    makeCurrent();
+
     delete m_sprite;
+    delete m_shader;
+
+    doneCurrent();
+}
+
+void GLWidget::setClearColor(const QColor &color)
+{
+    m_clearColor = color;
+    update();
+}
+
+QSize GLWidget::minimumSizeHint() const
+{
+    return QSize(50,50);
+}
+
+QSize GLWidget::sizeHint() const
+{
+    return QSize(200,200);
 }
 
 void GLWidget::paintGL()
 {
+    glClearColor(m_clearColor.redF(), m_clearColor.greenF(), m_clearColor.blueF(), m_clearColor.alphaF());
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    m_shader->bind();
+    glActiveTexture(GL_TEXTURE0);
+    glUniform1i(m_shader->uniformLocation("testTexture"), 0);
 
     m_time += 0.01f;
     m_shader->setUniformValue("time", m_time);
 
     m_sprite->draw(m_shader);
-    m_shader->release();
 
     m_frameCounter++;
 }
@@ -81,30 +103,34 @@ void GLWidget::initTimers()
 void GLWidget::initShaders()
 {
     m_shader = new QOpenGLShaderProgram(this);
-    if( m_shader->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/resources/vertshader.vert"))
+    if( m_shader->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vertshader.vert"))
         qDebug() << "Vertex shader compiled succesfuly";
-    if (m_shader->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/resources/fragshader.frag"))
+    if (m_shader->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fragshader.frag"))
         qDebug() << "Fragment shader compiled succesfuly";
     m_shader->bindAttributeLocation("vertexPosition", 0);
     m_shader->bindAttributeLocation("vertexColor", 1);
+    m_shader->bindAttributeLocation("vertexUV", 2);
     m_shader->link();
+    m_shader->bind();
+    m_shader->setUniformValue("testTexture", 0);
 }
 
 void GLWidget::initializeGL()
 {
+    initializeOpenGLFunctions();
+
     initScreen();
     connectSlotsSignals();
     initTimers();
 
     this->setMouseTracking(true);
 
-    initializeOpenGLFunctions();
-
     initShaders();
 
-    glClearColor(0.0, 0.0, 1.0, 1.0);
+    m_resourceManager.loadTexture(":/CharacterRight_Standing.png", m_testTexture);
+    qDebug() << m_testTexture->textureId();
 
-    m_sprite = new Sprite(-0.5f, -0.5f, 1.0f, 1.0f);
+    m_sprite = new Sprite(-1.0f, -1.0f, 2.0f, 2.0f, m_testTexture);
 }
 
 void GLWidget::refresh()

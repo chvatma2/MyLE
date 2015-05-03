@@ -17,11 +17,18 @@ struct Color
     GLubyte alpha;
 };
 
+struct UV
+{
+    GLfloat u;
+    GLfloat v;
+};
+
 struct Vertex
 {
     Position position;
     Color color;
-    void set(GLfloat posX, GLfloat posY, GLubyte r, GLubyte g, GLubyte b, GLubyte a)
+    UV uv;
+    void set(GLfloat posX, GLfloat posY, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat u, GLfloat v)
     {
         position.x = posX;
         position.y = posY;
@@ -29,6 +36,8 @@ struct Vertex
         color.green = g;
         color.blue = b;
         color.alpha = a;
+        uv.u = u;
+        uv.v = v;
     }
 };
 

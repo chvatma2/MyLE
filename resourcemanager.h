@@ -11,7 +11,7 @@ class ResourceManager
 public:
     ResourceManager();
     bool readTextToBuffer(QFile file);
-    void loadTexture(QString fileName, QOpenGLTexture* texture);
+    void loadTexture(QString fileName, QOpenGLTexture*& texture);
 };
 
 #endif // RESOURCEMANAGER_H
