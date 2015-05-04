@@ -1,22 +1,26 @@
 #include "sprite.h"
 
-Sprite::Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, QOpenGLTexture *texture)
-    : m_x(x), m_y(y), m_width(width), m_height(height), m_vbo(0), m_texture(texture)
+Sprite::Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, const QString& texturePath, ResourceManager& resourceManager)
+    : m_x(x), m_y(y), m_width(width), m_height(height), m_vbo(0)
 {
     initializeOpenGLFunctions();
-    m_vertexes[0].set(x + width, y + height, 0, 255, 0, 255, 1.0, 1.0);
-    m_vertexes[1].set(x, y + height, 255, 0, 0, 255, 0.0, 1.0);
-    m_vertexes[2].set(x, y, 255, 0, 0, 255, 0.0, 0.0);
-    m_vertexes[3].set(x, y, 255, 0, 0, 255, 0.0, 0.0);
-    m_vertexes[4].set(x + width, y, 255, 0, 0, 255, 1.0, 0.0);
-    m_vertexes[5].set(x + width, y + height, 0, 0, 255, 255, 1.0, 1.0 );
+    Vertex vertexes[6];
+    vertexes[0].set(x + width, y + height, 0, 255, 0, 255, 1.0, 1.0);
+    vertexes[1].set(x, y + height, 255, 0, 0, 255, 0.0, 1.0);
+    vertexes[2].set(x, y, 255, 0, 0, 255, 0.0, 0.0);
+    vertexes[3].set(x, y, 255, 0, 0, 255, 0.0, 0.0);
+    vertexes[4].set(x + width, y, 255, 0, 0, 255, 1.0, 0.0);
+    vertexes[5].set(x + width, y + height, 0, 0, 255, 255, 1.0, 1.0 );
+
+    m_texture = resourceManager.loadTexture(texturePath);
 
     m_vbo = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     m_vbo->create();
 
     m_vbo->bind();
-    //Upload the data to the GPU
-    m_vbo->allocate(m_vertexes, sizeof(m_vertexes));
+
+    m_vbo->allocate(vertexes, sizeof(vertexes));
+
 }
 
 Sprite::~Sprite()
@@ -28,6 +32,7 @@ Sprite::~Sprite()
 
 void Sprite::draw (QOpenGLShaderProgram* program)
 {
+    m_vbo->bind();
     program->enableAttributeArray(0);
     program->enableAttributeArray(1);
     program->enableAttributeArray(2);
@@ -37,10 +42,12 @@ void Sprite::draw (QOpenGLShaderProgram* program)
     program->setAttributeBuffer(2, GL_FLOAT, offsetof(Vertex, uv), 2, sizeof(Vertex));
 
     m_texture->bind();
+
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     program->disableAttributeArray(0);
     program->disableAttributeArray(1);
     program->disableAttributeArray(2);
+    m_vbo->release();
 
 }

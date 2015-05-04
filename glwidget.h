@@ -5,7 +5,6 @@
 #include <QOpenGLFunctions_3_3_Compatibility>
 #include <QOpenGLShaderProgram>
 #include <QTimer>
-#include <QTime>
 #include <QColor>
 #include "inputmanager.h"
 #include "sprite.h"
@@ -23,9 +22,6 @@ public:
     void paintGL() Q_DECL_OVERRIDE;
     void resizeGL(int w, int h) Q_DECL_OVERRIDE;
     void initializeGL() Q_DECL_OVERRIDE;
-    QSize minimumSizeHint() const Q_DECL_OVERRIDE;
-
-    QSize sizeHint() const Q_DECL_OVERRIDE;
 
     void setClearColor(const QColor& color);
 
@@ -38,7 +34,6 @@ private:
     QTimer m_redrawTimer;
     QTimer m_fpsTimer;
     InputManager* m_inputManager;
-    Sprite * m_sprite;
     QOpenGLShaderProgram * m_shader;
     GLfloat m_time;
     QColor m_clearColor;
@@ -47,6 +42,8 @@ private:
     QOpenGLTexture * m_testTexture;
 
     int m_frameCounter;
+    QVector<Sprite*> m_sprites;
+
 
     void connectSlotsSignals();
     void initScreen();

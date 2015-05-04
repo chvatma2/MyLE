@@ -5,13 +5,18 @@
 #include <QImage>
 #include <QVector>
 #include <QOpenGLTexture>
+#include "texturecache.h"
 
 class ResourceManager
 {
 public:
     ResourceManager();
-    bool readTextToBuffer(QFile file);
-    void loadTexture(QString fileName, QOpenGLTexture*& texture);
+
+    void deleteTextures();
+
+    QOpenGLTexture* loadTexture(const QString& fileName);
+private:
+    TextureCache m_textureCache;
 };
 
 #endif // RESOURCEMANAGER_H

@@ -13,13 +13,15 @@ GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_shader(0), m_time
     f.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
     f.setSwapInterval(1);
     this->setFormat(f);
+    setMinimumSize(200, 200);
 }
 
 GLWidget::~GLWidget()
 {
     makeCurrent();
 
-    delete m_sprite;
+    foreach (Sprite* s, m_sprites)
+        delete s;
     delete m_shader;
 
     doneCurrent();
@@ -29,16 +31,6 @@ void GLWidget::setClearColor(const QColor &color)
 {
     m_clearColor = color;
     update();
-}
-
-QSize GLWidget::minimumSizeHint() const
-{
-    return QSize(50,50);
-}
-
-QSize GLWidget::sizeHint() const
-{
-    return QSize(200,200);
 }
 
 void GLWidget::paintGL()
@@ -53,7 +45,10 @@ void GLWidget::paintGL()
     m_time += 0.01f;
     m_shader->setUniformValue("time", m_time);
 
-    m_sprite->draw(m_shader);
+    foreach (Sprite* s, m_sprites)
+    {
+        s->draw(m_shader);
+    }
 
     m_frameCounter++;
 }
@@ -127,10 +122,10 @@ void GLWidget::initializeGL()
 
     initShaders();
 
-    m_resourceManager.loadTexture(":/CharacterRight_Standing.png", m_testTexture);
-    qDebug() << m_testTexture->textureId();
+    //m_resourceManager.loadTexture(":/CharacterRight_Standing.png", m_testTexture);
 
-    m_sprite = new Sprite(-1.0f, -1.0f, 2.0f, 2.0f, m_testTexture);
+    m_sprites.push_back(new Sprite(0.0f, 0.0f, 1.0f, 1.0f, ":/CharacterRight_Standing.png", m_resourceManager));
+    m_sprites.push_back(new Sprite(-1.0f, 0.0f, 1.0f, 1.0f, ":/CharacterRight_Standing.png", m_resourceManager));
 }
 
 void GLWidget::refresh()

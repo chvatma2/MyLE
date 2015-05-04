@@ -5,14 +5,16 @@ SOURCES += \
     glwidget.cpp \
     inputmanager.cpp \
     sprite.cpp \
-    resourcemanager.cpp
+    resourcemanager.cpp \
+    texturecache.cpp
 
 HEADERS += \
     glwidget.h \
     inputmanager.h \
     sprite.h \
     vertex.h \
-    resourcemanager.h
+    resourcemanager.h \
+    texturecache.h
 
 DISTFILES += \
     fragshader.frag \

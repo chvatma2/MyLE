@@ -9,11 +9,12 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 #include "vertex.h"
+#include "resourcemanager.h"
 
 class Sprite : protected QOpenGLFunctions_3_3_Compatibility
 {
 public:
-    Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, QOpenGLTexture* texture);
+    Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, const QString &texturePath, ResourceManager& resourceManager);
     ~Sprite();
     void draw (QOpenGLShaderProgram* program);
 
@@ -23,7 +24,6 @@ private:
     GLfloat m_width;
     GLfloat m_height;
 
-    Vertex m_vertexes[6];
     QOpenGLBuffer* m_vbo;
     QOpenGLTexture* m_texture;
 };
