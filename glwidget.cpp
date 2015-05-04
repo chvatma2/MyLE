@@ -8,8 +8,6 @@ GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_shader(0), m_time
 {
     m_inputManager = new InputManager(this);
     QSurfaceFormat f = this->format();
-    f.setMajorVersion(3);
-    f.setMinorVersion(3);
     f.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
     f.setSwapInterval(1);
     this->setFormat(f);
@@ -35,6 +33,7 @@ void GLWidget::setClearColor(const QColor &color)
 
 void GLWidget::paintGL()
 {
+    qDebug() << "painting";
     glClearColor(m_clearColor.redF(), m_clearColor.greenF(), m_clearColor.blueF(), m_clearColor.alphaF());
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -126,6 +125,7 @@ void GLWidget::initializeGL()
 
     m_sprites.push_back(new Sprite(0.0f, 0.0f, 1.0f, 1.0f, ":/CharacterRight_Standing.png", m_resourceManager));
     m_sprites.push_back(new Sprite(-1.0f, 0.0f, 1.0f, 1.0f, ":/CharacterRight_Standing.png", m_resourceManager));
+    qDebug() << "initialized";
 }
 
 void GLWidget::refresh()

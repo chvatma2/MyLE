@@ -1,7 +1,7 @@
 #ifndef VERTEX
 #define VERTEX
 
-#include <QOpenGLFunctions_3_3_Compatibility>
+#include <QOpenGLFunctions>
 
 struct Position
 {

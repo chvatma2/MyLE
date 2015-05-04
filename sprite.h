@@ -5,13 +5,13 @@
 #include <QVector2D>
 #include <QVector>
 #include <QDebug>
-#include <QOpenGLFunctions_3_3_Compatibility>
+#include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 #include "vertex.h"
 #include "resourcemanager.h"
 
-class Sprite : protected QOpenGLFunctions_3_3_Compatibility
+class Sprite : protected QOpenGLFunctions
 {
 public:
     Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, const QString &texturePath, ResourceManager& resourceManager);

@@ -2,7 +2,7 @@
 #define GLWIDGET_H
 
 #include <QOpenGLWidget>
-#include <QOpenGLFunctions_3_3_Compatibility>
+#include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QTimer>
 #include <QColor>
@@ -11,7 +11,7 @@
 #include "vertex.h"
 #include "resourcemanager.h"
 
-class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Compatibility
+class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 
