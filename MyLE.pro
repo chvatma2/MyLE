@@ -6,6 +6,9 @@
 
 QT += core gui opengl
 
+QMAKE_CXXFLAGS_RELEASE -= O2
+QMAKE_CXXFLAGS_RELEASE += O3
+
 TARGET = MyLE
 TEMPLATE = lib
 CONFIG += staticlib
@@ -22,8 +25,6 @@ HEADERS += \
     vertex.h \
     resourcemanager.h \
     texturecache.h
-
-DISTFILES +=
 
 RESOURCES +=
 
