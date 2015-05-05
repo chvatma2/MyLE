@@ -17,14 +17,16 @@ SOURCES += \
     inputmanager.cpp \
     sprite.cpp \
     resourcemanager.cpp \
-    texturecache.cpp
+    texturecache.cpp \
+    glwidget.cpp
 
 HEADERS += \
     inputmanager.h \
     sprite.h \
     vertex.h \
     resourcemanager.h \
-    texturecache.h
+    texturecache.h \
+    glwidget.h
 
 RESOURCES +=
 
