@@ -3,6 +3,9 @@
 
 #include <QOpenGLFunctions>
 
+namespace MyLE
+{
+
 struct Position
 {
     GLfloat x;
@@ -40,6 +43,8 @@ struct Vertex
         uv.v = v;
     }
 };
+
+}
 
 #endif // VERTEX
 

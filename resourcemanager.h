@@ -7,6 +7,9 @@
 #include <QOpenGLTexture>
 #include "texturecache.h"
 
+namespace MyLE
+{
+
 class ResourceManager
 {
 public:
@@ -18,5 +21,7 @@ public:
 private:
     TextureCache m_textureCache;
 };
+
+}
 
 #endif // RESOURCEMANAGER_H

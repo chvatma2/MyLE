@@ -11,6 +11,9 @@
 #include "vertex.h"
 #include "resourcemanager.h"
 
+namespace MyLE
+{
+
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -55,4 +58,5 @@ signals:
     void mouseMoveEvent(QMouseEvent* event);
 };
 
+}
 #endif // GLWIDGET_H

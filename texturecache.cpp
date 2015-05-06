@@ -1,5 +1,7 @@
 #include "texturecache.h"
 
+using namespace MyLE;
+
 TextureCache::TextureCache()
 {
 

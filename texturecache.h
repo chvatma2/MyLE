@@ -5,6 +5,9 @@
 #include <QOpenGLTexture>
 #include <QDebug>
 
+namespace MyLE
+{
+
 class TextureCache
 {
 public:
@@ -15,5 +18,7 @@ public:
 private:
     QHash<QString, QOpenGLTexture*> m_textureMap;
 };
+
+}
 
 #endif // TEXTURECACHE_H

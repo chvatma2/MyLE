@@ -1,9 +1,16 @@
 #include "inputmanager.h"
 #include <iostream>
 
+using namespace MyLE;
+
 InputManager::InputManager(QObject* parent) : QObject(parent)
 {
 
+}
+
+void InputManager::setOwnerWindow(QWidget *owner)
+{
+    m_owner = owner;
 }
 
 void InputManager::keyPressed(QKeyEvent *event)
@@ -12,6 +19,12 @@ void InputManager::keyPressed(QKeyEvent *event)
     {
     case Qt::Key_Tab:
         std::cout << "tab pressed" << std::endl;
+        break;
+    case Qt::Key_F11:
+        if(m_owner->isFullScreen())
+            m_owner->showMaximized();
+        else
+            m_owner->showFullScreen();
         break;
     }
 }

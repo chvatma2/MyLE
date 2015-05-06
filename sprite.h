@@ -11,6 +11,9 @@
 #include "vertex.h"
 #include "resourcemanager.h"
 
+namespace MyLE
+{
+
 class Sprite : protected QOpenGLFunctions
 {
 public:
@@ -27,5 +30,7 @@ private:
     QOpenGLBuffer* m_vbo;
     QOpenGLTexture* m_texture;
 };
+
+}
 
 #endif // SPRITE_H

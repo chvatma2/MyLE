@@ -18,7 +18,8 @@ SOURCES += \
     sprite.cpp \
     resourcemanager.cpp \
     texturecache.cpp \
-    glwidget.cpp
+    glwidget.cpp \
+    camera2d.cpp
 
 HEADERS += \
     inputmanager.h \
@@ -26,7 +27,8 @@ HEADERS += \
     vertex.h \
     resourcemanager.h \
     texturecache.h \
-    glwidget.h
+    glwidget.h \
+    camera2d.h
 
 RESOURCES +=
 

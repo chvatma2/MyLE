@@ -4,9 +4,12 @@
 #include <iostream>
 #include <QDebug>
 
+using namespace MyLE;
+
 GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent), m_shader(0), m_time(0), m_clearColor(Qt::darkBlue), m_frameCounter(0)
 {
     m_inputManager = new InputManager(this);
+    m_inputManager->setOwnerWindow(this);
 }
 
 GLWidget::~GLWidget()

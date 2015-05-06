@@ -1,5 +1,7 @@
 #include "sprite.h"
 
+using namespace MyLE;
+
 Sprite::Sprite(GLfloat x, GLfloat y, GLfloat width, GLfloat height, const QString& texturePath, ResourceManager& resourceManager)
     : m_x(x), m_y(y), m_width(width), m_height(height), m_vbo(0)
 {

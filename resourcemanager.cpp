@@ -1,6 +1,8 @@
 #include "resourcemanager.h"
 #include <QDebug>
 
+using namespace MyLE;
+
 ResourceManager::ResourceManager()
 {
 
