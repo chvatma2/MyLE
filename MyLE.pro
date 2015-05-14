@@ -12,6 +12,7 @@ QMAKE_CXXFLAGS_RELEASE += O3
 TARGET = MyLE
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += c++11
 
 SOURCES += \
     inputmanager.cpp \
@@ -19,7 +20,8 @@ SOURCES += \
     resourcemanager.cpp \
     texturecache.cpp \
     glwidget.cpp \
-    camera2d.cpp
+    camera2d.cpp \
+    spritebatch.cpp
 
 HEADERS += \
     inputmanager.h \
@@ -28,7 +30,8 @@ HEADERS += \
     resourcemanager.h \
     texturecache.h \
     glwidget.h \
-    camera2d.h
+    camera2d.h \
+    spritebatch.h
 
 RESOURCES +=
 

@@ -31,14 +31,20 @@ struct Vertex
     Position position;
     Color color;
     UV uv;
-    void set(GLfloat posX, GLfloat posY, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat u, GLfloat v)
+    void setPosition(GLfloat posX, GLfloat posY)
     {
         position.x = posX;
         position.y = posY;
+    }
+    void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
+    {
         color.red = r;
         color.green = g;
         color.blue = b;
         color.alpha = a;
+    }
+    void setUV(GLfloat u, GLfloat v)
+    {
         uv.u = u;
         uv.v = v;
     }

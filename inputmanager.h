@@ -3,10 +3,12 @@
 
 #include <QObject>
 #include <QKeyEvent>
-#include <QWidget>
+#include "glwidget.h"
 
 namespace MyLE
 {
+
+class GLWidget;
 
 class InputManager : public QObject
 {
@@ -14,15 +16,24 @@ class InputManager : public QObject
 
 public:
     InputManager(QObject* parent);
-    void setOwnerWindow(QWidget* owner);
 
 public slots:
     void keyPressed(QKeyEvent* event);
     void keyReleased(QKeyEvent* event);
     void mouseMoved(QMouseEvent* event);
+    void mouseButtonPressed(QMouseEvent* event);
+    void mouseButtonReleased(QMouseEvent* event);
+
+    bool isKeyPressed(Qt::Key key) const;
+    bool isButtonPressed(Qt::MouseButton button) const;
+
+    QVector2D getMousePosition() const;
 
 private:
-    QWidget* m_owner;
+    QSet<int> m_PressedKeys;
+    QSet<int> m_PressedButtons;
+
+    QVector2D m_MousePosition;
 };
 
 }

@@ -8,39 +8,45 @@ InputManager::InputManager(QObject* parent) : QObject(parent)
 
 }
 
-void InputManager::setOwnerWindow(QWidget *owner)
-{
-    m_owner = owner;
-}
-
 void InputManager::keyPressed(QKeyEvent *event)
 {
-    switch(event->key())
-    {
-    case Qt::Key_Tab:
-        std::cout << "tab pressed" << std::endl;
-        break;
-    case Qt::Key_F11:
-        if(m_owner->isFullScreen())
-            m_owner->showMaximized();
-        else
-            m_owner->showFullScreen();
-        break;
-    }
+    m_PressedKeys.insert(event->key());
 }
 
 void InputManager::keyReleased(QKeyEvent *event)
 {
-    switch(event->key())
-    {
-    case Qt::Key_Tab:
-        std::cout << "tab released" << std::endl;
-        break;
-    }
+        m_PressedKeys.remove(event->key());
+
 }
 
 void InputManager::mouseMoved(QMouseEvent *event)
 {
-    //std::cout << "X:" << event->localPos().x() << " Y:" << event->localPos().y() << std::endl;
+    m_MousePosition.setX(event->localPos().x());
+    m_MousePosition.setY(event->localPos().y());
+}
+
+void InputManager::mouseButtonPressed(QMouseEvent *event)
+{
+    m_PressedButtons.insert(event->button());
+}
+
+void InputManager::mouseButtonReleased(QMouseEvent *event)
+{
+    m_PressedButtons.remove(event->button());
+}
+
+bool InputManager::isKeyPressed(Qt::Key key) const
+{
+    return m_PressedKeys.contains(key);
+}
+
+bool InputManager::isButtonPressed(Qt::MouseButton button) const
+{
+    return m_PressedButtons.contains(button);
+}
+
+QVector2D InputManager::getMousePosition() const
+{
+    return m_MousePosition;
 }
 

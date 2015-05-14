@@ -10,9 +10,13 @@
 #include "sprite.h"
 #include "vertex.h"
 #include "resourcemanager.h"
+#include "camera2d.h"
+#include "spritebatch.h"
 
 namespace MyLE
 {
+
+class InputManager;
 
 class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -27,35 +31,42 @@ public:
     void initializeGL() Q_DECL_OVERRIDE;
 
     void setClearColor(const QColor& color);
+    void setActiveCamera(Camera2D* camera) {m_ActiveCamera = camera;}
     void refresh();
+
+    Camera2D* m_ActiveCamera;
 
 private slots:
     void printFPS();
 
 private:
-    QTimer m_fpsTimer;
-    InputManager* m_inputManager;
-    QOpenGLShaderProgram * m_shader;
-    GLfloat m_time;
-    QColor m_clearColor;
+    QTimer m_FPSTimer;
+    InputManager* m_InputManager;
+    QOpenGLShaderProgram * m_Shader;
+    GLfloat m_Time;
+    QColor m_ClearColor;
 
-    ResourceManager m_resourceManager;
-    QOpenGLTexture * m_testTexture;
+    ResourceManager m_ResourceManager;
+    QOpenGLTexture * m_TestTexture;
 
-    int m_frameCounter;
-    QVector<Sprite*> m_sprites;
+    int m_FrameCounter;
+
+    SpriteBatch m_SpriteBatch;
 
 
     void connectSlotsSignals();
     void initScreen();
     void initTimers();
     void initShaders();
+    void processInput();
 
 
 signals:
     void keyPressEvent(QKeyEvent* event);
     void keyReleaseEvent(QKeyEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
 };
 
 }
