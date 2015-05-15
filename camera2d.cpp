@@ -24,6 +24,7 @@ void Camera2D::update()
 
 QVector2D Camera2D::convertScreenPosition(QVector2D screenPosition)
 {
+    screenPosition.setY(m_ScreenHeight - screenPosition.y());
     screenPosition -= QVector2D(m_ScreenWidth/2, m_ScreenHeight/2);
     screenPosition /= m_Scale;
     screenPosition += m_Position;

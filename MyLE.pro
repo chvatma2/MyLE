@@ -19,7 +19,6 @@ SOURCES += \
     sprite.cpp \
     resourcemanager.cpp \
     texturecache.cpp \
-    glwidget.cpp \
     camera2d.cpp \
     spritebatch.cpp
 
@@ -29,7 +28,6 @@ HEADERS += \
     vertex.h \
     resourcemanager.h \
     texturecache.h \
-    glwidget.h \
     camera2d.h \
     spritebatch.h
 

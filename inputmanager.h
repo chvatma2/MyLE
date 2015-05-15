@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QKeyEvent>
-#include "glwidget.h"
 
 namespace MyLE
 {
@@ -15,7 +14,7 @@ class InputManager : public QObject
     Q_OBJECT
 
 public:
-    InputManager(QObject* parent);
+    InputManager();
 
 public slots:
     void keyPressed(QKeyEvent* event);

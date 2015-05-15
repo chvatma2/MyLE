@@ -3,7 +3,7 @@
 
 using namespace MyLE;
 
-InputManager::InputManager(QObject* parent) : QObject(parent)
+InputManager::InputManager() : QObject()
 {
 
 }

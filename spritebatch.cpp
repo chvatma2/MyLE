@@ -7,10 +7,11 @@ SpriteBatch::SpriteBatch()
 
 }
 
-void SpriteBatch::init(QOpenGLShaderProgram* program)
+void SpriteBatch::init(QOpenGLShaderProgram* program, ResourceManager* resManager)
 {
     initializeOpenGLFunctions();
     createVertexArray(program);
+    m_ResourceManager = resManager;
 }
 
 void SpriteBatch::begin(GlyphSortType sortType)
@@ -28,11 +29,11 @@ void SpriteBatch::end()
     createRenderBatches();
 }
 
-void SpriteBatch::draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, GLuint texture, float depth, const QColor color)
+void SpriteBatch::draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, QString texture, float depth, const QColor &color)
 {
     Glyph* newGlyph = new Glyph;
 
-    newGlyph->texture = texture;
+    newGlyph->texture = m_ResourceManager->loadTexture(texture)->textureId();
     newGlyph->depth = depth;
 
     newGlyph->topLeft.setColor(color.red(), color.green(), color.blue(), color.alpha());

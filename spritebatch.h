@@ -11,6 +11,7 @@
 #include <vector>
 #include <QOpenGLShaderProgram>
 #include "vertex.h"
+#include "resourcemanager.h"
 
 namespace MyLE
 {
@@ -48,10 +49,10 @@ class SpriteBatch : public QOpenGLFunctions
 public:
     SpriteBatch();
 
-    void init(QOpenGLShaderProgram* program);
+    void init(QOpenGLShaderProgram* program, ResourceManager* resManager);
     void begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
     void end();
-    void draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, GLuint texture, float depth, const QColor color);
+    void draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, QString texture, float depth, const QColor& color);
     void renderBatch();
 
 private:
@@ -67,6 +68,7 @@ private:
     QVector<Glyph*> m_Glyphs;
     std::vector<RenderBatch> m_RenderBatches;
     GlyphSortType m_SortType;
+    ResourceManager* m_ResourceManager;
 };
 
 }
