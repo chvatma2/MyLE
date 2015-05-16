@@ -4,26 +4,24 @@ using namespace MyLE;
 
 TextureCache::TextureCache()
 {
-
 }
 
-QOpenGLTexture* TextureCache::getTexture(const QString& filePath)
+GLuint TextureCache::getTexture(const QString& filePath)
 {
-    QHash<QString, QOpenGLTexture*>::const_iterator it = m_textureMap.find(filePath);
-    if(it != m_textureMap.end())
-        return it.value();
+    if(m_TextureMap.contains(filePath))
+        return m_TextureMap.value(filePath)->textureId();
 
     QImage image;
     if( !image.load(filePath) )
         qDebug() << "Could not load texture " << filePath;
     QOpenGLTexture* texture = new QOpenGLTexture(image.mirrored());
 
-    m_textureMap.insert(filePath, texture);
-    return texture;
+    m_TextureMap.insert(filePath, texture);
+    return texture->textureId();
 }
 
 void TextureCache::deleteTextures()
 {
-    foreach(QOpenGLTexture* texture, m_textureMap)
+    foreach(QOpenGLTexture* texture, m_TextureMap)
         delete texture;
 }

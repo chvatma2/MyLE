@@ -52,7 +52,7 @@ public:
     void init(QOpenGLShaderProgram* program, ResourceManager* resManager);
     void begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
     void end();
-    void draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, QString texture, float depth, const QColor& color);
+    void draw(const QVector4D &destRectangle, const QVector4D &uvRectangle, GLuint texture, float depth, const QColor& color);
     void renderBatch();
 
 private:

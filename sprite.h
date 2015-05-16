@@ -28,7 +28,7 @@ private:
     GLfloat m_height;
 
     QOpenGLBuffer* m_vbo;
-    QOpenGLTexture* m_texture;
+    GLuint m_texture;
 };
 
 }

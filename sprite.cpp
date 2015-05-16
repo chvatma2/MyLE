@@ -52,7 +52,7 @@ void Sprite::draw (QOpenGLShaderProgram* program)
     program->setAttributeBuffer(2, GL_FLOAT, offsetof(Vertex, uv), 2, sizeof(Vertex));
 //    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
-    m_texture->bind();
+//    m_texture->bind();
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 

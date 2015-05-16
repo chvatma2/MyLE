@@ -17,7 +17,7 @@ public:
 
     void deleteTextures();
 
-    QOpenGLTexture* loadTexture(const QString& fileName);
+    GLuint loadTexture(const QString& fileName);
 private:
     TextureCache m_textureCache;
 };

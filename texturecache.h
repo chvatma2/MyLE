@@ -4,6 +4,7 @@
 #include <QHash>
 #include <QOpenGLTexture>
 #include <QDebug>
+#include <QString>
 
 namespace MyLE
 {
@@ -12,11 +13,12 @@ class TextureCache
 {
 public:
     TextureCache();
-    QOpenGLTexture* getTexture(const QString &filePath);
+
+    GLuint getTexture(const QString& filePath);
     void deleteTextures();
 
 private:
-    QHash<QString, QOpenGLTexture*> m_textureMap;
+    QHash<QString, QOpenGLTexture*> m_TextureMap;
 };
 
 }
